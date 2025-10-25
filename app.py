@@ -1,13 +1,18 @@
 import os, asyncio
+
+# stop Streamlit's file watcher from scanning site-packages
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 os.environ["STREAMLIT_DISABLE_WATCHDOG_WARNING"] = "true"
 
+# optional: reduce PyTorch lazy init behaviour that can cause introspection errors
+os.environ["PYTORCH_JIT"] = "0"
+
+# ensure an event-loop exists (prevents "no running event loop")
 try:
     asyncio.get_running_loop()
 except RuntimeError:
     asyncio.set_event_loop(asyncio.new_event_loop())
 
-import asyncio
 import streamlit as st
 import torch
 from youtube_notes import YouTubeNotes
