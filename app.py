@@ -1,4 +1,10 @@
+import os
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+os.environ["STREAMLIT_DISABLE_WATCHDOG_WARNING"] = "true"
+
+import asyncio
 import streamlit as st
+import torch
 from youtube_notes import YouTubeNotes
 from database.chroma import ChromaDB
 
