@@ -10,8 +10,12 @@ class YouTubeUtils:
     def get_transcript(self, video_id: str) -> Optional[str]:
         """Fetch YouTube transcript for a given video ID."""
         try:
-            transcript = YouTubeTranscriptApi.get_transcript(video_id)
-            return " ".join([entry["text"] for entry in transcript])
+            ytt_api = YouTubeTranscriptApi()
+            transcript = ytt_api.fetch(video_id)
+            cleaned_transcript = ""
+            for entry in transcript.snippets:
+                cleaned_transcript += entry.text + " "
+            return cleaned_transcript.strip()
         except Exception as e:
             print(f"Error fetching transcript: {e}")
             return None
