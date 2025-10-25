@@ -1,6 +1,7 @@
 import os
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 os.environ["STREAMLIT_DISABLE_WATCHDOG_WARNING"] = "true"
+os.environ["PYTORCH_JIT"] = "0"
 
 import asyncio
 import streamlit as st
