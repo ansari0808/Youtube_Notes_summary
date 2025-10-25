@@ -1,7 +1,11 @@
-import os
+import os, asyncio
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 os.environ["STREAMLIT_DISABLE_WATCHDOG_WARNING"] = "true"
-os.environ["PYTORCH_JIT"] = "0"
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 import asyncio
 import streamlit as st
